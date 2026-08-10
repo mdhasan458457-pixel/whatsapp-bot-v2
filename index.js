@@ -1,4 +1,14 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
+const http = require('http');
+
+// Render-এর পোর্ট ইরর (Port scan timeout) দূর করার জন্য ডামি সার্ভার কোড
+const port = process.env.PORT || 3000;
+http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('WhatsApp Bot is Live!\n');
+}).listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
 
 async function connectToWhatsApp() {
     try {
