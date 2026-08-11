@@ -9,7 +9,7 @@ http.createServer((req, res) => {
     res.end('HLINK BD WhatsApp Bot is Live!\n');
 }).listen(port);
 
-// Gemini AI কনফিগারেশন (আপনার API Key এখানে বসানো হয়েছে)
+// Gemini AI কনফিগারেশন
 const ai = new GoogleGenAI({ apiKey: "AIzaSyAC940YTKFbnAfYGDNI3P0gYEUf22YIMkY" });
 
 // বটের জন্য প্রাথমিক নির্দেশনা (System Instruction)
@@ -46,11 +46,15 @@ async function connectToWhatsApp() {
             // টাইপিং অ্যানিমেশন দেখাবে
             await sock.sendPresenceUpdate('composing', remoteJid);
 
-            // Gemini AI থেকে রেসপন্স জেনারেট করা
+            // Gemini AI রেসপন্স তৈরির সঠিক নিয়ম (models.generateContent)
             const response = await ai.models.generateContent({
                 model: 'gemini-2.5-flash',
-                contents: incomingText,
-                config: { systemInstruction: businessPrompt }
+                contents: [
+                    { text: incomingText }
+                ],
+                config: {
+                    systemInstruction: businessPrompt
+                }
             });
 
             const replyText = response.text;
