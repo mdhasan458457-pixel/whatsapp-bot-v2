@@ -1,12 +1,14 @@
 {
-  "name": "whatsapp-bot-v2",
+  "name": "whatsapp-ai-bot",
   "version": "1.0.0",
-  "description": "WhatsApp Bot",
+  "description": "WhatsApp AI Bot using Gemini",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.9"
+    "@whiskeysockets/baileys": "^6.3.0",
+    "@google/genai": "^0.1.1",
+    "qrcode-terminal": "^0.12.0"
   }
 }
